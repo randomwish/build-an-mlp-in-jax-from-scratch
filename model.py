@@ -70,8 +70,18 @@ def init_linear_layer(key, in_dim, out_dim, scale=0.1):
         'b': bias_vector
     }
 
-# Step 8 - init_mlp_params (not yet solved)
-# TODO: implement
+# Step 8 - init_mlp_params
+def init_mlp_params(key, layer_sizes, scale=0.1):
+    # TODO: build a list of per-layer parameter dicts from adjacent layer sizes.
+    no_layers = len(layer_sizes) - 1
+    list_of_split_keys = split_prng_key(key,no_layers)
+    layers = []
+    for layer in range(no_layers):
+        layer_key = list_of_split_keys[layer]
+        layer_in, layer_out = layer_sizes[layer], layer_sizes[layer + 1]
+        layer_matrices = init_linear_layer(layer_key, layer_in, layer_out, scale)
+        layers.append(layer_matrices)
+    return layers
 
 # Step 9 - linear_forward (not yet solved)
 # TODO: implement
