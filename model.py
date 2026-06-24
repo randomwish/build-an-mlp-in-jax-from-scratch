@@ -55,8 +55,20 @@ def one_hot_encode_labels(labels, num_classes):
     bool_array = jax.numpy.equal(labels[:,None],jnp.arange(num_classes)[None,:]).astype('float32')
     return bool_array
 
-# Step 7 - init_linear_layer (not yet solved)
-# TODO: implement
+# Step 7 - init_linear_layer
+import jax
+import jax.numpy as jnp
+
+def init_linear_layer(key, in_dim, out_dim, scale=0.1):
+    """Return {'W': (in_dim, out_dim), 'b': (out_dim,)} for one dense layer."""
+    # TODO: sample W from a scaled normal and set b to zeros, return as a dict.
+    shape = (in_dim, out_dim)
+    weight_matrix = sample_normal_matrix(key, shape) * scale
+    bias_vector = jnp.zeros(out_dim)
+    return {
+        'W': weight_matrix,
+        'b': bias_vector
+    }
 
 # Step 8 - init_mlp_params (not yet solved)
 # TODO: implement
