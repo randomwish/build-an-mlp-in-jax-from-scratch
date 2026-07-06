@@ -97,8 +97,15 @@ def relu_activation(x):
     # TODO: return an array of the same shape with negatives replaced by zero.
     return jnp.where(x < 0, 0, x)
 
-# Step 11 - softmax_probabilities (not yet solved)
-# TODO: implement
+# Step 11 - softmax_probabilities
+import jax.numpy as jnp
+
+def softmax_probabilities(logits):
+    # TODO: convert logits into a numerically stable softmax along the last axis
+    new_logits = logits - jnp.max(logits)
+    exp_logits = jnp.exp(new_logits)
+    sum_logits = jnp.sum(exp_logits, axis=-1, keepdims=True)
+    return exp_logits / sum_logits
 
 # Step 12 - mlp_forward (not yet solved)
 # TODO: implement
