@@ -194,6 +194,9 @@ def train_mlp(params, x, one_hot_targets, learning_rate, num_epochs):
         new_params, _ = training_step(new_params, x, one_hot_targets, learning_rate)
     return new_params
 
-# Step 21 - predict_classes (not yet solved)
-# TODO: implement
+# Step 21 - predict_classes
+def predict_classes(params, x):
+    # TODO: run mlp_forward on x and return the argmax class index per row
+    logits = mlp_forward(params,x)
+    return jnp.argmax(logits, axis=-1)
 
