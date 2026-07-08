@@ -166,10 +166,13 @@ import jax.numpy as jnp
 
 def sgd_update_params(params, grads, learning_rate):
     # TODO: apply one SGD step to every parameter using its gradient and a learning rate
-    new_dict = {}
+    new_list = []
     for p, grad in zip(params, grads):
-        new_dict[p] = params[p] - learning_rate * grads[p]
-    return new_dict
+        new_list.append({
+            'W': p['W'] - learning_rate * grad['W'],
+            'b': p['b'] - learning_rate * grad['b'],
+        })
+    return new_list
 
 # Step 19 - training_step (not yet solved)
 # TODO: implement
